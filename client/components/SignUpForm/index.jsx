@@ -1,37 +1,105 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Form } from 'semantic-ui-react';
+import { useSelector, useDispatch } from 'react-redux';
+import { submitForm } from '../../actions/form';
 import './styles.scss';
 
-const FormExampleForm = () => (
-  <div className="form-wrapper">
-    <Form>
-      <Form.Field>
-        <p className="field-title">First Name</p>
-        <input placeholder="First Name" />
-      </Form.Field>
-      <Form.Field>
-        <p className="field-title">Last Name</p>
-        <input placeholder="Last Name" />
-      </Form.Field>
-      <Form.Field>
-        <p className="field-title">Username</p>
-        <input placeholder="Username" />
-      </Form.Field>
-      <Form.Field>
-        <p className="field-title">Email</p>
-        <input placeholder="Email" />
-      </Form.Field>
-      <Form.Field>
-        <p className="field-title">Password</p>
-        <input placeholder="Password" />
-      </Form.Field>
-      <Form.Field>
-        <p className="field-title">Confirm Password</p>
-        <input placeholder="Confirm Password" />
-      </Form.Field>
-      <Button type="submit">Submit</Button>
-    </Form>
-  </div>
-);
+const FormExampleForm = () => {
+  const dispatch = useDispatch();
+  const {
+    firstName: firstNameRedux,
+    lastName: lastNameRedux,
+    username: usernameRedux,
+    email: emailRedux,
+    password: passwordRedux,
+    confirmPassword: confirmPasswordRedux
+  } = useSelector(state => state.form);
+
+  const [firstName, updateFirstName] = useState(firstNameRedux);
+  const [lastName, updateLastName] = useState(lastNameRedux);
+  const [username, updateUsername] = useState(usernameRedux);
+  const [email, updateEmail] = useState(emailRedux);
+  const [password, updatePassword] = useState(passwordRedux);
+  const [confirmPassword, updateConfirmedPassword] = useState(
+    confirmPasswordRedux
+  );
+  const submitValues = e => {
+    e.preventDefault();
+    const values = {
+      firstName,
+      lastName,
+      username,
+      email,
+      password,
+      confirmPassword
+    };
+    dispatch(submitForm(values));
+  };
+  const passwordsMatch = password === confirmPassword;
+  console.log({
+    firstName,
+    lastName,
+    username,
+    email,
+    password,
+    confirmPassword
+  });
+  return (
+    <div className="form-wrapper">
+      <Form>
+        <Form.Input
+          required
+          label="First Name"
+          placeholder="First Name"
+          value={firstName}
+          onChange={e => updateFirstName(e.target.value)}
+        />
+        <Form.Input
+          required
+          label="Last Name"
+          placeholder="Last Name"
+          value={lastName}
+          onChange={e => updateLastName(e.target.value)}
+        />
+        <Form.Input
+          required
+          placeholder="Username"
+          label="Username"
+          value={username}
+          onChange={e => updateUsername(e.target.value)}
+        />
+        <Form.Input
+          required
+          placeholder="Email"
+          label="Email"
+          value={email}
+          type="email"
+          onChange={e => updateEmail(e.target.value)}
+        />
+
+        <Form.Input
+          required
+          label="Password"
+          placeholder="Password"
+          value={password}
+          type="password"
+          onChange={e => updatePassword(e.target.value)}
+        />
+        <Form.Input
+          required
+          label="Confirm Password"
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          error={passwordsMatch ? null : 'Please Enter The Same Password'}
+          type="password"
+          onChange={e => updateConfirmedPassword(e.target.value)}
+        />
+        <Button type="submit" onClick={submitValues} disabled={!passwordsMatch}>
+          Submit
+        </Button>
+      </Form>
+    </div>
+  );
+};
 
 export default FormExampleForm;

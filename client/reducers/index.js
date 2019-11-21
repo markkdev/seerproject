@@ -1,5 +1,7 @@
+import { combineReducers } from 'redux';
+
 const initialState = {
-  firstName: '',
+  firstName: 'mark',
   lastName: '',
   username: '',
   email: '',
@@ -15,7 +17,7 @@ const initialState = {
 - Confirm Password
  */
 
-const rootReducer = (state = initialState, { type, payload }) => {
+const formReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case 'SUBMIT_FORM':
       return { ...state, ...payload };
@@ -24,4 +26,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
   }
 };
 
-export default rootReducer;
+const rootReducer = {
+  form: formReducer
+};
+
+export default combineReducers(rootReducer);
