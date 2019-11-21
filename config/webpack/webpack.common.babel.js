@@ -10,7 +10,7 @@ module.exports = {
         rules
     },
     resolve: {
-        modules: ['src', 'node_modules'],
+        modules: ['client', 'node_modules'],
         extensions: ['*', '.js', '.jsx', '.scss', '.css']
     },
     plugins: [

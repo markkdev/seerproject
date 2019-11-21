@@ -8,8 +8,8 @@
     "scripts": {
         "start": "cross-env NODE_ENV=development webpack-dev-server --open",
         "build": "cross-env NODE_ENV=production webpack",
-        "lint": "eslint --fix src -c .eslintrc --ext js,jsx && yarn sass-lint",
-        "sass-lint": "prettier-stylelint --write 'src/**/*.{css,scss}'",
+        "lint": "eslint --fix client -c .eslintrc --ext js,jsx && yarn sass-lint",
+        "sass-lint": "prettier-stylelint --write 'client/**/*.{css,scss}'",
         "test": "jest",
         "test:watch": "yarn run test --watch",
         "test:cover": "yarn run test --coverage",
