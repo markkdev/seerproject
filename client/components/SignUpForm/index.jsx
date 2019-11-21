@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { submitForm } from '../../actions/form';
 import './styles.scss';
 
@@ -14,7 +15,7 @@ const FormExampleForm = () => {
     password: passwordRedux,
     confirmPassword: confirmPasswordRedux
   } = useSelector(state => state.form);
-
+  const history = useHistory();
   const [firstName, updateFirstName] = useState(firstNameRedux);
   const [lastName, updateLastName] = useState(lastNameRedux);
   const [username, updateUsername] = useState(usernameRedux);
@@ -34,19 +35,12 @@ const FormExampleForm = () => {
       confirmPassword
     };
     dispatch(submitForm(values));
+    history.push('/verify');
   };
   const passwordsMatch = password === confirmPassword;
-  console.log({
-    firstName,
-    lastName,
-    username,
-    email,
-    password,
-    confirmPassword
-  });
   return (
     <div className="form-wrapper">
-      <Form>
+      <Form onSubmit={submitValues}>
         <Form.Input
           required
           label="First Name"
@@ -94,7 +88,7 @@ const FormExampleForm = () => {
           type="password"
           onChange={e => updateConfirmedPassword(e.target.value)}
         />
-        <Button type="submit" onClick={submitValues} disabled={!passwordsMatch}>
+        <Button type="submit" disabled={!passwordsMatch}>
           Submit
         </Button>
       </Form>

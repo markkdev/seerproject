@@ -27,7 +27,10 @@ module.exports = {
     contentBase: paths.outputPath,
     compress: true,
     hot: true,
-    historyApiFallback: true
+    historyApiFallback: true,
+    proxy: {
+      '/api/**': 'http://localhost:3000'
+    }
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

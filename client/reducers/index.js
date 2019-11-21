@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 const initialState = {
-  firstName: 'mark',
+  firstName: '',
   lastName: '',
   username: '',
   email: '',

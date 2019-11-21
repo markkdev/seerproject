@@ -1,10 +1,19 @@
 import React from 'react';
-import HelloWorld from '../../components/HelloWorld';
+import Page from '../../layouts/Page';
+import Title from '../../components/Title';
+import VerificationValues from '../../components/VerificationValues';
+import VerificationOptions from '../../components/VerificationOptions';
 
-const Home = () => {
-    return <HelloWorld />;
+const Verification = () => {
+  return (
+    <Page>
+      <Title title="Please Verify Your Information" />
+      <VerificationValues />
+      <VerificationOptions />
+    </Page>
+  );
 };
 
-Home.propTypes = {};
+Verification.propTypes = {};
 
-export default Home;
+export default Verification;
