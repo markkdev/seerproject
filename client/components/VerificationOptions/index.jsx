@@ -17,8 +17,7 @@ const VerificationOptions = () => {
     setIsLoading(true);
     axios
       .post('/api/verify', { firstName, lastName, username, email, password })
-      .then(res => {
-        console.log(res.status);
+      .then(() => {
         setIsLoading(false);
         history.push('/confirmed');
       })
