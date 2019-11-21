@@ -11,6 +11,7 @@ const VerificationOptions = () => {
   const { firstName, lastName, username, email, password } = useSelector(
     state => state.form
   );
+
   const sendConfirmation = e => {
     e.preventDefault();
     setIsLoading(true);
@@ -19,6 +20,7 @@ const VerificationOptions = () => {
       .then(res => {
         console.log(res.status);
         setIsLoading(false);
+        history.push('/confirmed');
       })
       .catch(err => {
         console.log(err.message);
